@@ -1,4 +1,4 @@
-package runners;
+package runners.gauss;
 
 import context.MPIContext;
 import mpi.MPI;

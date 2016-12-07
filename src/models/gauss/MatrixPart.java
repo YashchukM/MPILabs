@@ -1,4 +1,4 @@
-package models;
+package models.gauss;
 
 import java.util.ArrayList;
 import java.util.HashSet;

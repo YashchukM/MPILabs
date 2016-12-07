@@ -1,9 +1,9 @@
 package solvers;
 
 import context.MPIContext;
-import runners.GaussMPIRunner;
-import runners.LeaderGaussMPIRunner;
-import runners.SlaveGaussMPIRunner;
+import runners.gauss.GaussMPIRunner;
+import runners.gauss.LeaderGaussMPIRunner;
+import runners.gauss.SlaveGaussMPIRunner;
 
 /**
  * Created by Михайло on 29.11.2016.

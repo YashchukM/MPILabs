@@ -1,4 +1,4 @@
-package runners;
+package runners.gauss;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

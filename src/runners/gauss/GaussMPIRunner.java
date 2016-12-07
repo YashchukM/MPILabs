@@ -1,11 +1,12 @@
-package runners;
+package runners.gauss;
 
 import java.util.Arrays;
 
 import context.MPIContext;
-import models.MatrixHelper;
-import models.MatrixPart;
+import models.gauss.MatrixHelper;
+import models.gauss.MatrixPart;
 import mpi.MPI;
+import runners.MPIRunner;
 
 /**
  * Created by Михайло on 29.11.2016.
@@ -75,6 +76,12 @@ public abstract class GaussMPIRunner implements MPIRunner {
         return indexHolder[0];
     }
 
+    private double getSolution(double solutionCandidate, int sender) {
+        double[] solutionHolder = { solutionCandidate };
+        MPI.COMM_WORLD.Bcast(solutionHolder, 0, 1, MPI.DOUBLE, sender);
+        return solutionHolder[0];
+    }
+
     private void transformRows(int curCol, double[] rowWithMax) {
         double globalMax = rowWithMax[curCol];
         for (int rowInd = 0; rowInd < matrixPart.getRowsNumber(); rowInd++) {
@@ -115,11 +122,5 @@ public abstract class GaussMPIRunner implements MPIRunner {
             row[matrixHelper.getSize()] -= row[order] * curSolution;
             row[order] = 0d;
         }
-    }
-
-    private double getSolution(double solutionCandidate, int sender) {
-        double[] solutionHolder = { solutionCandidate };
-        MPI.COMM_WORLD.Bcast(solutionHolder, 0, 1, MPI.DOUBLE, sender);
-        return solutionHolder[0];
     }
 }

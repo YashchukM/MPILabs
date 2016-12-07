@@ -1,4 +1,4 @@
-package models;
+package models.gauss;
 
 /**
  * Created by Михайло on 29.11.2016.
