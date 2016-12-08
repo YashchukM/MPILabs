@@ -1,5 +1,6 @@
 import mpi.MPI;
 import solvers.ParallelGaussSolver;
+import solvers.ParallelGraphSolver;
 import solvers.ParallelSortingSolver;
 
 /**
@@ -10,7 +11,8 @@ public class Main {
         MPI.Init(args);
 
 //        ParallelGaussSolver.solve();
-        ParallelSortingSolver.solve();
+//        ParallelSortingSolver.solve();
+        ParallelGraphSolver.solve();
 
         MPI.Finalize();
     }

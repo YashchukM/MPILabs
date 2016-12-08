@@ -92,6 +92,12 @@ public class MPIContext {
         return valueHolder[0];
     }
 
+    public static int[] receiveIntArray(int size, int sender) {
+        int[] valueHolder = new int[size];
+        MPI.COMM_WORLD.Recv(valueHolder, 0, size, MPI.INT, sender, MPIContext.CUSTOM_TAG);
+        return valueHolder;
+    }
+
     public static double[] receiveDoubleArray(int size, int sender) {
         double[] valueHolder = new double[size];
         MPI.COMM_WORLD.Recv(valueHolder, 0, size, MPI.DOUBLE, sender, MPIContext.CUSTOM_TAG);
@@ -104,9 +110,19 @@ public class MPIContext {
         return result;
     }
 
+    public static double[] reduceDoubleArray(double[] array, Op operation) {
+        double[] result = new double[array.length];
+        MPI.COMM_WORLD.Reduce(array, 0, result, 0, array.length, MPI.DOUBLE, operation, LEADER_ID);
+        return result;
+    }
+
     public static void sendInt(int value, int receiver) {
         int[] valueHolder = { value };
         MPI.COMM_WORLD.Send(valueHolder, 0, 1, MPI.INT, receiver, MPIContext.CUSTOM_TAG);
+    }
+
+    public static void sendIntArray(int[] array, int receiver) {
+        MPI.COMM_WORLD.Send(array, 0, array.length, MPI.INT, receiver, MPIContext.CUSTOM_TAG);
     }
 
     public static void sendDoubleArray(double[] array, int receiver) {
